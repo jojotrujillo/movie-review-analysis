@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="663.333333333333,3955.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="663.333333333333,4166.66666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="31">
+    <scg:List x:TypeArguments="x:String" Capacity="36">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -32,10 +32,15 @@
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -64,22 +69,25 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="636,3850.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="636,4102" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="formattedSentiment" />
       <Variable x:TypeArguments="x:String" Name="sentiment" />
       <Variable x:TypeArguments="sd:DataRow" Name="dr_Sentiment" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_SentimentAnalysis" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_MovieSearch" />
+      <Variable x:TypeArguments="x:String" Name="myPassword" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BuildDataTable DataTable="[dt_SentimentAnalysis]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="594,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Sentiment&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:BuildDataTable DataTable="[dt_SentimentAnalysis]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="594,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Sentiment&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
     <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="594,3301.33333333333" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="https://rpachallenge.com/">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -219,11 +227,9 @@
                   </ui:BrowserScope.Body>
                 </ui:BrowserScope>
               </Sequence>
-              <ui:InvokeCode ContinueOnError="{x:Null}" Code="dt_MovieSearch.AcceptChanges();&#xD;&#xA;foreach (DataRow row in dt_MovieSearch.Rows)&#xD;&#xA;{&#xD;&#xA;&#x9;if (!(row[&quot;Title&quot;].ToString().Contains(&quot;close&quot;)))&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;row.Delete();&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;row[&quot;Title&quot;] = row[&quot;Title&quot;].ToString().Replace(&quot;close&quot;, &quot;&quot;).Replace(&quot;\n&quot;, &quot;&quot;);&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;dt_MovieSearch.AcceptChanges();&#xD;&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="476,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+              <ui:InvokeCode ContinueOnError="{x:Null}" Code="dt_MovieSearch.AcceptChanges();&#xA;foreach (DataRow row in dt_MovieSearch.Rows)&#xA;{&#xA;&#x9;if (!(row[&quot;Title&quot;].ToString().Contains(&quot;close&quot;)))&#xA;&#x9;{&#xA;&#x9;&#x9;row.Delete();&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;row[&quot;Title&quot;] = row[&quot;Title&quot;].ToString().Replace(&quot;close&quot;, &quot;&quot;).Replace(&quot;\n&quot;, &quot;&quot;);&#xA;&#x9;}&#xA;}&#xA;dt_MovieSearch.AcceptChanges();&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="476,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
                 <ui:InvokeCode.Arguments>
-                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt_MovieSearch">
-                    <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_MovieSearch" />
-                  </InOutArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt_MovieSearch">[dt_MovieSearch]</InOutArgument>
                 </ui:InvokeCode.Arguments>
               </ui:InvokeCode>
               <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_MovieSearch]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="476,336" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
@@ -361,16 +367,22 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:OpenBrowser>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="var counter = 0;&#xD;&#xA;dt_MovieSearch.Columns.Add(&quot;Sentiment&quot;, typeof(String));&#xD;&#xA;&#xD;&#xA;foreach(DataRow row in dt_MovieSearch.Rows)&#xD;&#xA;{&#xD;&#xA;    row[&quot;Sentiment&quot;] = dt_SentimentAnalysis.Rows[counter].Field&lt;String&gt;(&quot;Sentiment&quot;);&#xD;&#xA;&#x9;counter++;&#xD;&#xA;}&#xD;&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="594,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="var counter = 0;&#xA;dt_MovieSearch.Columns.Add(&quot;Sentiment&quot;, typeof(String));&#xA;&#xA;foreach(DataRow row in dt_MovieSearch.Rows)&#xA;{&#xA;    row[&quot;Sentiment&quot;] = dt_SentimentAnalysis.Rows[counter].Field&lt;String&gt;(&quot;Sentiment&quot;);&#xA;&#x9;counter++;&#xA;}&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="594,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
       <ui:InvokeCode.Arguments>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt_MovieSearch">
-          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_MovieSearch" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_SentimentAnalysis">
-          <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_SentimentAnalysis" />
-        </InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt_MovieSearch">[dt_MovieSearch]</InOutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_SentimentAnalysis">[dt_SentimentAnalysis]</InArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
     <ui:WriteRange AddHeaders="True" DataTable="[dt_MovieSearch]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="594,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="sentiment-analysis.xlsx" />
+    <ui:GetPassword DisplayName="Get Password" sap:VirtualizedContainerService.HintSize="594,22" sap2010:WorkflowViewState.IdRef="GetPassword_1" ProtectedPassword="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3NX6Xp5hfE2n/GB2gZ+wwgAAAAACAAAAAAAQZgAAAAEAACAAAABJrbStA/rmokAxkj11XW7ZdKVCAfi5FxLdoU2KJOIO3wAAAAAOgAAAAAIAACAAAAC6sNe7Z++6CPCcAT09qbvA7o/jILhV5ApCou7HXt0KQxAAAACktTvGgGX42QcmckwFnU3JQAAAAAM0JJexgy3IVER0e9Qpnuv1ZsNlXf3wG+gbgi2a+dJvz2Y+C13yK4R00TA0yOLIyJllQ+9cQVRnNJPNXWoWQRs=" Result="[myPassword]" />
+    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" Body="Attached is the report on the movie review sentiments derived from rpachallenge.com." DisplayName="Send SMTP Mail Message" Email="smegglebob1970@gmail.com" EnableSSL="True" From="smegglebob1970@gmail.com" sap:VirtualizedContainerService.HintSize="594,149.333333333333" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Name="Smeggle Bob" Password="[myPassword]" Port="587" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Movie Review Analysis Report" To="royce.george536@gmail.com">
+      <ui:SendMail.Files>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String">sentiment-analysis.xlsx</Literal>
+          </InArgument>
+        </scg:List>
+      </ui:SendMail.Files>
+    </ui:SendMail>
   </Sequence>
 </Activity>
